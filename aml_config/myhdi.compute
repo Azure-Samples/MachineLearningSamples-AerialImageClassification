@@ -1,0 +1,5 @@
+address: mawahtest-ssh.azurehdinsight.net
+password: AzureMlSecret=myhdi#sshuser#a07f2712b0e847209f3af2c0107621b8
+type: cluster
+username: sshuser
+yarnDeployMode: cluster
