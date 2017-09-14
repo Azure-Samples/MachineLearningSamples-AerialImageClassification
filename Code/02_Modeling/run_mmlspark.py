@@ -34,7 +34,7 @@ class ConfigFile(object):
 		config = ConfigParser(allow_no_value=True)
 		config.read(config_filename)
 		my_config = config['Settings']
-		self.spark = pyspark.sql.SparkSession.builder.appName('vienna') \
+		self.spark = pyspark.sql.SparkSession.builder.appName('AzureMachineLearningWorkbench_AerialImageClassification') \
 			.getOrCreate()
 
 		self.pretrained_model_type = pretrained_model_type
@@ -153,7 +153,7 @@ def main(pretrained_model_type, mmlspark_model_type, config_filename,
 		.transform(predictions)
 	metrics.show()
 	run_logger.log('accuracy_on_test_set', metrics.first()['accuracy'])
-	
+
 	# Save the predictions
 	tf = mmlspark.IndexToValue().setInputCol('scored_labels') \
 		.setOutputCol('pred_label')

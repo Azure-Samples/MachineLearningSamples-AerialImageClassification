@@ -146,6 +146,8 @@ We now create the storage account that hosts project files that must be accessed
 <a name="hdinsight"></a>
 #### Create the HDInsight Spark cluster
 
+[YC: It seems that you are creating a HDI with 10 worker nodes, that's a lot for normal Azure subscription. It is better to tell people ahead here. Otherwise they may not know why the code is failing. ]
+
 Our recommended method to create an HDInsight cluster uses the HDInsight Spark cluster Resource Manager template included in the "Code\01_Data_Acquisition_and_Understanding\01_HDInsight_Spark_Provisioning" subfolder of this tutorial.
 
 1. Choose a unique name and password for the HDInsight cluster and write them where indicated in the following command. Then create the cluster by issuing the following command:

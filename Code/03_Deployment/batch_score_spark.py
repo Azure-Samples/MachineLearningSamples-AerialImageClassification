@@ -34,7 +34,7 @@ class ConfigFile(object):
 		config = ConfigParser(allow_no_value=True)
 		config.read(config_filename)
 		my_config = config['Settings']
-		self.spark = pyspark.sql.SparkSession.builder.appName('vienna') \
+		self.spark = pyspark.sql.SparkSession.builder.appName('AzureMachineLearningWorkbench_AerialImageClassification') \
 			.getOrCreate()
 
 		# Load storage account info
