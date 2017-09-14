@@ -43,10 +43,10 @@ To produce an image classifier using transfer learning, data scientists often co
 
 Before beginning this tutorial, it is necessary to create an HDInsight cluster and ensure that it can access all necessary packages, sample data, and pretrained CNTK models. The following instructions guide you through this process.
 
-Prerequisites:
+**Prerequisites**:
 - An [Azure account](https://azure.microsoft.com/en-us/free/) (free trials are available)
-- [Azure Machine Learning Workbench](./overview-what-is-azure-ml.md)
-    - Follow the [quick start installation guide](./quick-start-installation.md) to install the program and create a workspace
+- [Azure Machine Learning Workbench](./overview-what-is-azure-ml)
+    - Follow the [quick start installation guide](./quick-start-installation) to install the program and create a workspace
 - [AzCopy](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy), a free utility for coordinating file transfer between Azure storage accounts
 
 <a name="resources"></a>
