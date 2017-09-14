@@ -1,6 +1,8 @@
 # Real World Scenario: Aerial Image Classification
 [YC: Does reader need to read the README.md before dive into this instruction document? If not, then it's better to include some intro info from there to this document to build up the context for reader.]
+
 [YC: it would be better to include some screenshots of vienna and the results/visualization of model.]
+
 [YC: it would be nice to know the cost and time investment of doing this tutorial up front.]
 
 
@@ -40,7 +42,9 @@ To produce an image classifier using transfer learning, data scientists often co
 
 <a name="structure"></a>
 ## Scenario Structure
+
 [YC: It would be clearer to provide a diagram/image to illustrate what will be done locally, what will be done on cloud with the help of workbench, and how they are connecting. Like an architecture]
+
 [YC: Added this part so that audiences can have a higher level picture of what they are going to deploy in next section]
 
 In this example, image data and pretrained models are housed in an Azure storage account. An Azure HDInsight Spark cluster reads these files and constructs an image classification model using MMLSpark. The trained model and its predictions are then written to the storage account, where they can be analyzed and visualized by a Jupyter notebook running locally. Azure Machine Learning Workbench coordinates remote execution of scripts on the Spark cluster. It also tracks accuracy metrics for multiple models trained using different methods, allowing the user to select the most performant model.
@@ -206,7 +210,7 @@ The training and validation datasets contain ~44,000 images (4 GB) and ~11k imag
 
 <a name="mmlsparktrain"></a>
 ### Training models with MMLSpark
-The `run_mmlspark.py` script in the "Code\02_Modeling" [YC: provide the link of the code here] subfolder of the Workbench project is used to train an [MMLSpark](https://github.com/Azure/mmlspark) model for image classification. The script first featurizes the training set images using an image classifier DNN pretrained on the ImageNet dataset (either AlexNet or an 18-layer ResNet). The script then uses the featurized images to train an MMLSpark model (either a random forest or a logistic regression model) to classify the images. The test image set is then featurized and scored with the trained model. The accuracy of the model's predictions on the test set is calculated and logged to AML Workbench's run history feature. Finally, the trained MMLSpark model and its predictions on the test set are saved to blob storage.
+The `run_mmlspark.py` script in the "Code\02_Modeling" subfolder of the Workbench project is used to train an [MMLSpark](https://github.com/Azure/mmlspark) model for image classification. The script first featurizes the training set images using an image classifier DNN pretrained on the ImageNet dataset (either AlexNet or an 18-layer ResNet). The script then uses the featurized images to train an MMLSpark model (either a random forest or a logistic regression model) to classify the images. The test image set is then featurized and scored with the trained model. The accuracy of the model's predictions on the test set is calculated and logged to AML Workbench's run history feature. Finally, the trained MMLSpark model and its predictions on the test set are saved to blob storage.
 
 Select a name for your trained model, a pretrained model type, and an MMLSpark model type. Write your selections where indicated in the following command, then begin retraining by executing the command from an Azure ML Command Line Interface:
 

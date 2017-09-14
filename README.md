@@ -23,7 +23,9 @@ Class-balanced sets of ~44k images are used for model training and 11k images fo
 ![Location of Middlesex County, Massachusetts](Images/middlesex_ma.png)
 
 ## Scenario Structure
+
 [YC: It would be clearer to provide a diagram/image to illustrate what will be done locally, what will be done on cloud with the help of workbench, and how they are connecting. Like an architecture]
+
 [YC: links below about Microsoft DOCT site and step-by-step instructions should be updated to the correct links]
 
 Step-by-step instructions are provided on the [Microsoft DOCS site](https://github.com/MicrosoftDocs/azure-docs-pr/tree/release-ignite-aml-v2/articles/machine-learning/); a brief description of the workflow follows.
@@ -49,7 +51,9 @@ Azure Machine Learning Workbench helps data scientists easily deploy their code 
 This example was tested on a Windows 10 PC; you should be able to run it from any Windows machine, including Azure Data Science Virtual Machines. Minor modifications may be required (for example, changes to file paths) when running this example on macOS.
 
 [YC: I think it would be better to introduce the use case before showing reader the prerequisites of the solution since it's more on the technical side.]
+
 [YC: Is this tutorial tested on DSVM? If yes, could we provide the version of DSVM that is tested? ]
+
 [YC: information about pricing? how much it cost for people to try the tutorial?]
 
 
