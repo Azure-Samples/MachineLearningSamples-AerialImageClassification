@@ -1,4 +1,5 @@
-# Real World Scenario: Aerial Image Classification
+# Aerial Image Classification
+
 
 ## Introduction
 
@@ -40,7 +41,7 @@ In this example, image data and pretrained models are housed in an Azure storage
 The [step-by-step instructions](https://github.com/MicrosoftDocs/azure-docs-pr/tree/release-ignite-aml-v2/articles/machine-learning/) begin by guiding you through the creation and preparation of an Azure storage account and Spark cluster, including data transfer and dependency installation. They then describe how to launch training jobs and compare the performance of the resulting models. Finally, they illustrate how to apply a chosen model to a large image set on the Spark cluster and analyze the prediction results locally.
 
 
-## Conclusions and next steps
+## Conclusions
 
 Azure Machine Learning Workbench helps data scientists easily deploy their code on remote compute targets. In this example, local code was deployed for remote execution on an HDInsight cluster. Azure Machine Learning Workbench's run history feature tracked the performance of multiple models and helped us identify the most accurate model. Workbench's Jupyter notebooks feature helped visualize our models' predictions in an interactive, graphical environment.
 
@@ -56,8 +57,3 @@ Azure Machine Learning Workbench helps data scientists easily deploy their code 
 ## Contact
 
 Please feel free to contact Mary Wahl ([mawah@microsoft.com](mailto:mawah@microsoft.com)) with any questions or comments.
-
-
-## Disclaimer
-
-Leave this session as what it is for now. We update the content once we get more concrete answers from the legal team.
