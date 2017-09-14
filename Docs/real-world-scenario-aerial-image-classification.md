@@ -1,4 +1,8 @@
 # Real World Scenario: Aerial Image Classification
+[YC: Does reader need to read the README.md before dive into this instruction document? If not, then it's better to include some intro info from there to this document to build up the context for reader.]
+[YC: it would be better to include some screenshots of vienna and the results/visualization of model.]
+[YC: it would be nice to know the cost and time investment of doing this tutorial up front.]
+
 
 This example demonstrates how to use Azure Machine Learning (AML) Workbench to coordinate distributed training and operationalization of image classification models. We featurize images using pre-trained CNTK models with [Microsoft Machine Learning for Apache Spark (MMLSpark)](https://github.com/Azure/mmlspark) package and train classifiers using the derived features. We then apply the trained models in parallel fashion to large image sets in the cloud. These steps are performed on an [Azure HDInsight Spark](https://azure.microsoft.com/en-us/services/hdinsight/apache-spark/) cluster, allowing us to scale the speed of training and operationalization by adding or removing worker nodes.
 
@@ -183,6 +187,8 @@ pip install matplotlib azure-storage==0.36.0 pillow scikit-learn
 <a name="dataunderstanding"></a>
 ## Data acquisition and understanding
 
+[YC: if reader is not expected to read the README.md file before this file, then it's better to put the data intro example to here as well.]
+
 During setup, the aerial image sets used in this tutorial were transferred to the storage account that you created. The training, validation, and operationalization images are all 224 pixel x 224 pixel PNG files at a resolution of one pixel per square meter. The training and validation images have been organized into subfolders based on their land use label. (The land use labels of the operationalization images are unknown and in many cases ambiguous; some of these images contain multiple land types.) For more information on how these image sets were constructed, see the [Embarrassingly Parallel Image Classification git repository](https://github.com/Azure/Embarrassingly-Parallel-Image-Classification).
 
 To view example images:
@@ -200,7 +206,7 @@ The training and validation datasets contain ~44,000 images (4 GB) and ~11k imag
 
 <a name="mmlsparktrain"></a>
 ### Training models with MMLSpark
-The `run_mmlspark.py` script in the "Code\02_Modeling" subfolder of the Workbench project is used to train an [MMLSpark](https://github.com/Azure/mmlspark) model for image classification. The script first featurizes the training set images using an image classifier DNN pretrained on the ImageNet dataset (either AlexNet or an 18-layer ResNet). The script then uses the featurized images to train an MMLSpark model (either a random forest or a logistic regression model) to classify the images. The test image set is then featurized and scored with the trained model. The accuracy of the model's predictions on the test set is calculated and logged to AML Workbench's run history feature. Finally, the trained MMLSpark model and its predictions on the test set are saved to blob storage.
+The `run_mmlspark.py` script in the "Code\02_Modeling" [YC: provide the link of the code here] subfolder of the Workbench project is used to train an [MMLSpark](https://github.com/Azure/mmlspark) model for image classification. The script first featurizes the training set images using an image classifier DNN pretrained on the ImageNet dataset (either AlexNet or an 18-layer ResNet). The script then uses the featurized images to train an MMLSpark model (either a random forest or a logistic regression model) to classify the images. The test image set is then featurized and scored with the trained model. The accuracy of the model's predictions on the test set is calculated and logged to AML Workbench's run history feature. Finally, the trained MMLSpark model and its predictions on the test set are saved to blob storage.
 
 Select a name for your trained model, a pretrained model type, and an MMLSpark model type. Write your selections where indicated in the following command, then begin retraining by executing the command from an Azure ML Command Line Interface:
 
@@ -216,6 +222,8 @@ Users are encouraged to run this script several times with different input param
 ### Comparing model performance using the Workbench Run History feature
 
 After you have executed two or more training runs of either type, navigate to the Run History feature in Workbench by clicking the clock icon along the left-hand menu bar. Select `run_mmlspark.py` from the list of scripts at left. A pane loads comparing the test set accuracy for all runs. To see more detail, scroll down and click on the name of an individual run.
+
+[YC: user should get a model name in this step?]
 
 <a name="deployment"></a>
 ## Deployment
