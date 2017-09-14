@@ -32,21 +32,21 @@ Following is the link to the public GitHub repository:
 - [Disclaimer](#disclaimer)
 
 <a name="usecasedescription"></a>
-## Use case description
+## Use Case Description
 
 In this scenario, we train deep neural networks (DNNs) to classify the type of land shown in aerial images of 224-meter x 224-meter plots. Land use classification models can be used to track urbanization, deforestation, loss of wetlands, and other major environmental trends using periodically collected aerial imagery. We have prepared training and validation image sets based on imagery from the U.S. National Agriculture Imagery Program and land use labels published by the U.S. National Land Cover Database. After training and validating the classifier model, we will apply it to aerial images spanning Middlesex County, MA -- home of Microsoft's New England Research & Development (NERD) Center -- to demonstrate how these models can be used to study trends in urban development.
 
 To produce an image classifier using transfer learning, data scientists often construct multiple models with a range of methods and select the most performant model. Azure Machine Learning Workbench can help data scientists coordinate training across compute environments, track and compare the performance of multiple models, and apply a chosen model to large datasets on the cloud.
 
 <a name="excenv"></a>
-## Set up the execution environment
+## Set up the Execution Environment
 
 Before beginning this tutorial, it is necessary to create an HDInsight cluster and ensure that it can access all necessary packages, sample data, and pretrained CNTK models. The following instructions guide you through this process.
 
-Prerequisites:
+**Prerequisites**:
 - An [Azure account](https://azure.microsoft.com/en-us/free/) (free trials are available)
-- [Azure Machine Learning Workbench](./overview-what-is-azure-ml.md)
-    - Follow the [quick start installation guide](./quick-start-installation.md) to install the program and create a workspace
+- [Azure Machine Learning Workbench](./overview-what-is-azure-ml)
+    - Follow the [quick start installation guide](./quick-start-installation) to install the program and create a workspace
 - [AzCopy](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy), a free utility for coordinating file transfer between Azure storage accounts
 
 <a name="resources"></a>
