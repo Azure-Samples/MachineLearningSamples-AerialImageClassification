@@ -1,11 +1,12 @@
 # Real World Scenario: Aerial Image Classification
 
-This example demonstrates how to use Azure Machine Learning (AML) Workbench to coordinate distributed training and operationalization of image classification models. We use the [Microsoft Machine Learning for Apache Spark (MMLSpark)](https://github.com/Azure/mmlspark) package to featurize images using pretrained CNTK models and train classifiers using the derived features. We then apply the trained models in parallel fashion to large image sets in the cloud. These steps are performed on an [Azure HDInsight Spark](https://azure.microsoft.com/en-us/services/hdinsight/apache-spark/) cluster, allowing us to scale the speed of training and operationalization by adding or removing worker nodes.
+This example demonstrates how to use Azure Machine Learning (AML) Workbench to coordinate distributed training and operationalization of image classification models. We featurize images using pre-trained CNTK models with [Microsoft Machine Learning for Apache Spark (MMLSpark)](https://github.com/Azure/mmlspark) package and train classifiers using the derived features. We then apply the trained models in parallel fashion to large image sets in the cloud. These steps are performed on an [Azure HDInsight Spark](https://azure.microsoft.com/en-us/services/hdinsight/apache-spark/) cluster, allowing us to scale the speed of training and operationalization by adding or removing worker nodes.
 
 The form of transfer learning we demonstrate has major advantages over retraining or fine-tuning a deep neural network: it does not require GPU compute, is inherently fast and arbitrarily scalable, and fits fewer parameters. This method is therefore an excellent choice when few training samples are available -- as is often the case for custom use cases. Many users report that transfer learning produces highly performant models, allowing them to avoid deep neural networks trained from scratch at much greater cost.
 
 ## Outline
 - [Use case description](#usecasedescription)
+- [Scenario Structure](#structure)
 - [Set up the execution environment](#excenv)
   - [Deploy Azure resources](#resources)
      - [Log in to the Azure Command Line Interface and create the resource group](#clilogin)
@@ -33,24 +34,34 @@ In this scenario, we train deep neural networks (DNNs) to classify the type of l
 
 To produce an image classifier using transfer learning, data scientists often construct multiple models with a range of methods and select the most performant model. Azure Machine Learning Workbench can help data scientists coordinate training across compute environments, track and compare the performance of multiple models, and apply a chosen model to large datasets on the cloud.
 
+<a name="structure"></a>
+## Scenario Structure
+[YC: It would be clearer to provide a diagram/image to illustrate what will be done locally, what will be done on cloud with the help of workbench, and how they are connecting. Like an architecture]
+[YC: Added this part so that audiences can have a higher level picture of what they are going to deploy in next section]
+
+In this example, image data and pretrained models are housed in an Azure storage account. An Azure HDInsight Spark cluster reads these files and constructs an image classification model using MMLSpark. The trained model and its predictions are then written to the storage account, where they can be analyzed and visualized by a Jupyter notebook running locally. Azure Machine Learning Workbench coordinates remote execution of scripts on the Spark cluster. It also tracks accuracy metrics for multiple models trained using different methods, allowing the user to select the most performant model.
+
+The [step-by-step instructions](https://github.com/MicrosoftDocs/azure-docs-pr/tree/release-ignite-aml-v2/articles/machine-learning/) begin by guiding you through the creation and preparation of an Azure storage account and Spark cluster, including data transfer and dependency installation. They then describe how to launch training jobs and compare the performance of the resulting models. Finally, they illustrate how to apply a chosen model to a large image set on the Spark cluster and analyze the prediction results locally.
+
 <a name="excenv"></a>
 ## Set up the execution environment
+The following instructions guide you through the process of setting up execution environment for this tutorial.
 
-Before beginning this tutorial, it is necessary to create an HDInsight cluster and ensure that it can access all necessary packages, sample data, and pretrained CNTK models. The following instructions guide you through this process.
-
-Prerequisites:
+### Prerequisites:
 - An [Azure account](https://azure.microsoft.com/en-us/free/) (free trials are available)
 - [Azure Machine Learning Workbench](./overview-what-is-azure-ml.md)
     - Follow the [quick start installation guide](./quick-start-installation.md) to install the program and create a workspace
 - [AzCopy](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy), a free utility for coordinating file transfer between Azure storage accounts
 
+[YC: any requirement about the subscription's core quota?]
+
 <a name="resources"></a>
-### Deploy Azure resources
+### Set up Azure resources
 
 This tutorial requires an HDInsight Spark cluster and an Azure storage account to host relevant files. Follow these instructions to create these resources in a new Azure resource group:
 
 <a name="clilogin"></a>
-#### Log in to the Azure Command Line Interface and create the resource group
+#### Create Azure resource group
 
 Load the Aerial Image Classification project in Azure Machine Learning Workbench as follows:
 

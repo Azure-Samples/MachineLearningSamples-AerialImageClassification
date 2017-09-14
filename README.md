@@ -1,22 +1,10 @@
 # Real World Scenario: Aerial Image Classification
-[YC: It would be nice to provide a diagram/image to illustrate what is done locally and what is done on cloud with the help of workbench.]
 
 ## Introduction
 
-This example demonstrates how to use Azure Machine Learning (AML) Workbench to coordinate distributed training and operationalization of image classification models. We use the [Microsoft Machine Learning for Apache Spark (MMLSpark)](https://github.com/Azure/mmlspark) package to featurize images using pretrained CNTK models and train classifiers using the derived features. We then apply the trained models in parallel fashion to large image sets in the cloud. These steps are performed on an [Azure HDInsight Spark](https://azure.microsoft.com/en-us/services/hdinsight/apache-spark/) cluster, allowing us to scale the speed of training and operationalization by adding or removing worker nodes.
+This example demonstrates how to use Azure Machine Learning (AML) Workbench to coordinate distributed training and operationalization of image classification models. We featurize images using pre-trained CNTK models with [Microsoft Machine Learning for Apache Spark (MMLSpark)](https://github.com/Azure/mmlspark) package and train classifiers using the derived features. We then apply the trained models in parallel fashion to large image sets in the cloud. These steps are performed on an [Azure HDInsight Spark](https://azure.microsoft.com/en-us/services/hdinsight/apache-spark/) cluster, allowing us to scale the speed of training and operationalization by adding or removing worker nodes.
 
 The form of transfer learning we demonstrate has major advantages over retraining or fine-tuning a deep neural network: it does not require GPU compute, is fast and arbitrarily scalable, and fits fewer parameters than a dense neural network layer. This method is therefore an excellent choice when few training samples are available -- as is often the case for custom projects. Many users report that transfer learning produces highly performant models, allowing them to avoid deep neural networks trained from scratch at much greater cost.
-
-## Prerequisites
-
-- An [Azure account](https://azure.microsoft.com/en-us/free/) (free trials are available)
-- An installed copy of [Azure Machine Learning Workbench](./overview-what-is-azure-ml.md)
-    - Follow the [quick start installation guide](./quick-start-installation.md) to install the program and create a workspace
-- An installed copy of [AzCopy](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy), a free utility for coordinating file transfer between Azure storage accounts
-
-This example was tested on a Windows 10 PC; you should be able to run it from any Windows machine, including Azure Data Science Virtual Machines. Minor modifications may be required (for example, changes to file paths) when running this example on macOS.
-
-[YC: Is this tutorial tested on DSVM? If yes, could we provide the version of DSVM that is tested? ]
 
 ## Use Case Description
 
@@ -35,6 +23,7 @@ Class-balanced sets of ~44k images are used for model training and 11k images fo
 ![Location of Middlesex County, Massachusetts](Images/middlesex_ma.png)
 
 ## Scenario Structure
+[YC: It would be clearer to provide a diagram/image to illustrate what will be done locally, what will be done on cloud with the help of workbench, and how they are connecting. Like an architecture]
 [YC: links below about Microsoft DOCT site and step-by-step instructions should be updated to the correct links]
 
 Step-by-step instructions are provided on the [Microsoft DOCS site](https://github.com/MicrosoftDocs/azure-docs-pr/tree/release-ignite-aml-v2/articles/machine-learning/); a brief description of the workflow follows.
@@ -48,7 +37,21 @@ The [step-by-step instructions](https://github.com/MicrosoftDocs/azure-docs-pr/t
 
 Azure Machine Learning Workbench helps data scientists easily deploy their code on remote compute targets. In this example, local code was deployed for remote execution on an HDInsight cluster. Azure Machine Learning Workbench's run history feature tracked the performance of multiple models and helped us identify the most accurate model. Workbench's Jupyter notebooks feature helped visualize our models' predictions in an interactive, graphical environment.
 
-[YC: Next steps are not described here. We can include some actions points for user to dive deeper to this tutorial.]
+[YC: Next steps are not described here. We can include some actions points for user to dive deeper to this tutorial, like step 1:..., step 2: .....]
+
+## Prerequisites
+
+- An [Azure account](https://azure.microsoft.com/en-us/free/) (free trials are available)
+- An installed copy of [Azure Machine Learning Workbench](./overview-what-is-azure-ml.md)
+    - Follow the [quick start installation guide](./quick-start-installation.md) to install the program and create a workspace
+- An installed copy of [AzCopy](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy), a free utility for coordinating file transfer between Azure storage accounts
+
+This example was tested on a Windows 10 PC; you should be able to run it from any Windows machine, including Azure Data Science Virtual Machines. Minor modifications may be required (for example, changes to file paths) when running this example on macOS.
+
+[YC: I think it would be better to introduce the use case before showing reader the prerequisites of the solution since it's more on the technical side.]
+[YC: Is this tutorial tested on DSVM? If yes, could we provide the version of DSVM that is tested? ]
+[YC: information about pricing? how much it cost for people to try the tutorial?]
+
 
 ## References
 
