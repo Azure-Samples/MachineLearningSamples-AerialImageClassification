@@ -1,8 +1,13 @@
-# Real World Scenario: Aerial Image Classification
+# Aerial Image Classification
 
 This example demonstrates how to use Azure Machine Learning (AML) Workbench to coordinate distributed training and operationalization of image classification models. We use the [Microsoft Machine Learning for Apache Spark (MMLSpark)](https://github.com/Azure/mmlspark) package to featurize images using pretrained CNTK models and train classifiers using the derived features. We then apply the trained models in parallel fashion to large image sets in the cloud. These steps are performed on an [Azure HDInsight Spark](https://azure.microsoft.com/en-us/services/hdinsight/apache-spark/) cluster, allowing us to scale the speed of training and operationalization by adding or removing worker nodes.
 
 The form of transfer learning we demonstrate has major advantages over retraining or fine-tuning a deep neural network: it does not require GPU compute, is inherently fast and arbitrarily scalable, and fits fewer parameters. This method is therefore an excellent choice when few training samples are available -- as is often the case for custom use cases. Many users report that transfer learning produces highly performant models, allowing them to avoid deep neural networks trained from scratch at much greater cost.
+
+## Link of the Gallery GitHub repository
+Following is the link to the public GitHub repository: 
+
+[https://github.com/Azure/MachineLearningSamples-AerialImageClassification](https://github.com/Azure/MachineLearningSamples-AerialImageClassification)
 
 ## Outline
 - [Use case description](#usecasedescription)
@@ -230,7 +235,7 @@ The "Model prediction analysis" Jupyter notebook in the "Code\04_Result_Analysis
 
 
 <a name="conclusions"></a>
-## Conclusions and next steps
+## Conclusions
 
 Azure Machine Learning Workbench helps data scientists easily deploy their code on remote compute targets. In this example, local code was deployed for remote execution on an HDInsight cluster. Azure Machine Learning Workbench's run history feature tracked the performance of multiple models and helped us identify the most accurate model. Workbench's Jupyter notebooks feature helped visualize our models' predictions in an interactive, graphical environment.
 
@@ -254,8 +259,3 @@ When you have completed the tutorial, we recommend that you delete all of the re
 ## Contact
 
 Please feel free to contact Mary Wahl ([mawah@microsoft.com](mailto:mawah@microsoft.com)) with any questions or comments.
-
-<a name="disclaimer"></a>
-## Disclaimer
-
-Leave this session as what it is for now. We update the content once we get more concrete answers from the legal team.
