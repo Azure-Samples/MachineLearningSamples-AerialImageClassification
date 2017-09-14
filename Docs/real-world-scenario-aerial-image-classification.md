@@ -4,7 +4,7 @@ This example demonstrates how to use Azure Machine Learning (AML) Workbench to c
 
 The form of transfer learning we demonstrate has major advantages over retraining or fine-tuning a deep neural network: it does not require GPU compute, is inherently fast and arbitrarily scalable, and fits fewer parameters. This method is therefore an excellent choice when few training samples are available -- as is often the case for custom use cases. Many users report that transfer learning produces highly performant models, allowing them to avoid deep neural networks trained from scratch at much greater cost.
 
-The Spark cluster used in this example has 40 worker nodes and costs ~$40/hr to operate. Completing this walkthrough will take approximately two hours. When you are finished, follow the cleanup instructions to remove the resources you have created and stop incurring charges.
+The Spark cluster used in this example has 40 worker nodes and costs ~$40/hr to operate. Completing this walkthrough takes approximately two hours. When you are finished, follow the cleanup instructions to remove the resources you have created and stop incurring charges.
 
 ## Link to the Gallery GitHub repository
 
@@ -61,12 +61,12 @@ The [step-by-step instructions](https://github.com/MicrosoftDocs/azure-docs-pr/t
 <a name="excenv"></a>
 ## Set up the execution environment
 
-The following instructions guide you through the process of setting up execution environment for this tutorial.
+The following instructions guide you through the process of setting up execution environment for this example.
 
 <a name="prerequisites"></a>
 ### Prerequisites
 - An [Azure account](https://azure.microsoft.com/en-us/free/) (free trials are available)
-    - This tutorial creates an HDInsight Spark cluster with 40 worker nodes (168 cores total). Ensure that your account has enough available cores by reviewing the "Usage + quotas" tab for your subscription in Azure Portal.
+    - This sample creates an HDInsight Spark cluster with 40 worker nodes (168 cores total). Ensure that your account has enough available cores by reviewing the "Usage + quotas" tab for your subscription in Azure Portal.
     - If you have fewer cores available, you may modify the HDInsight cluster template to decrease the number of workers provisioned. Instructions for this appear under the "Create the HDInsight Spark cluster" section.
 - [Azure Machine Learning Workbench](./overview-what-is-azure-ml)
     - Follow the [quick start installation guide](./quick-start-installation) to install the program and create a workspace
@@ -77,7 +77,7 @@ This example was tested on a Windows 10 PC; you should be able to run it from an
 <a name="resources"></a>
 ### Set up Azure resources
 
-This tutorial requires an HDInsight Spark cluster and an Azure storage account to host relevant files. Follow these instructions to create these resources in a new Azure resource group:
+This example requires an HDInsight Spark cluster and an Azure storage account to host relevant files. Follow these instructions to create these resources in a new Azure resource group:
 
 <a name="clilogin"></a>
 #### Create the resource group
@@ -157,11 +157,11 @@ We now create the storage account that hosts project files that must be accessed
 <a name="hdinsight"></a>
 #### Create the HDInsight Spark cluster
 
-Our recommended method to create an HDInsight cluster uses the HDInsight Spark cluster Resource Manager template included in the "Code\01_Data_Acquisition_and_Understanding\01_HDInsight_Spark_Provisioning" subfolder of this tutorial.
+Our recommended method to create an HDInsight cluster uses the HDInsight Spark cluster Resource Manager template included in the "Code\01_Data_Acquisition_and_Understanding\01_HDInsight_Spark_Provisioning" subfolder of this project.
 
-1. The HDInsight Spark cluster template is the "template.json" file under the "Code\01_Data_Acquisition_and_Understanding\01_HDInsight_Spark_Provisioning" subfolder of this project. By default, the template will create a Spark cluster with 40 worker nodes. If you must adjust that number, open the template in your favorite text editor and replace all instances of "40" with the worker node number of your choice.
-    - You may encounter out-of-memory errors if the number of worker nodes you choose is very small. To combat this, you may run the training and operationalization scripts on a subset of the available data; details follow below.
-1. Choose a unique name and password for the HDInsight cluster and write them where indicated in the following command. Then create the cluster by issuing the following command:
+1. The HDInsight Spark cluster template is the "template.json" file under the "Code\01_Data_Acquisition_and_Understanding\01_HDInsight_Spark_Provisioning" subfolder of this project. By default, the template creates a Spark cluster with 40 worker nodes. If you must adjust that number, open the template in your favorite text editor and replace all instances of "40" with the worker node number of your choice.
+    - You may encounter out-of-memory errors if the number of worker nodes you choose is small. To combat memory errors, you may run the training and operationalization scripts on a subset of the available data as described later in this document.
+2. Choose a unique name and password for the HDInsight cluster and write them where indicated in the following command. Then create the cluster by issuing the following command:
 
     ```
     set HDINSIGHT_CLUSTER_NAME=[HDInsight cluster name]
@@ -212,7 +212,7 @@ Class-balanced sets of ~44k and 11k images are used for model training and valid
 
 ![Location of Middlesex County, Massachusetts](Images/middlesex_ma.png)
 
-During setup, the aerial image sets used in this tutorial were transferred to the storage account that you created. The training, validation, and operationalization images are all 224 pixel x 224 pixel PNG files at a resolution of one pixel per square meter. The training and validation images have been organized into subfolders based on their land use label. (The land use labels of the operationalization images are unknown and in many cases ambiguous; some of these images contain multiple land types.) For more information on how these image sets were constructed, see the [Embarrassingly Parallel Image Classification git repository](https://github.com/Azure/Embarrassingly-Parallel-Image-Classification).
+During setup, the aerial image sets used in this example were transferred to the storage account that you created. The training, validation, and operationalization images are all 224 pixel x 224 pixel PNG files at a resolution of one pixel per square meter. The training and validation images have been organized into subfolders based on their land use label. (The land use labels of the operationalization images are unknown and in many cases ambiguous; some of these images contain multiple land types.) For more information on how these image sets were constructed, see the [Embarrassingly Parallel Image Classification git repository](https://github.com/Azure/Embarrassingly-Parallel-Image-Classification).
 
 To view example images in your Azure storage account (optional):
 1. Log in to the [Azure portal](https://portal.azure.com).
@@ -275,7 +275,7 @@ The "Model prediction analysis" Jupyter notebook in the "Code\04_Result_Analysis
 
 Azure Machine Learning Workbench helps data scientists easily deploy their code on remote compute targets. In this example, local code was deployed for remote execution on an HDInsight cluster. Azure Machine Learning Workbench's run history feature tracked the performance of multiple models and helped us identify the most accurate model. Workbench's Jupyter notebooks feature helped visualize our models' predictions in an interactive, graphical environment.
 
-To dive deeper into this tutorial:
+To dive deeper into this example:
 - In Vienna's Run History feature, click the gear symbols to select which graphs and metrics are displayed.
 - Examine the sample scripts for statements calling the `run_logger`. Check that you understand how each metric is being recorded.
 - Examine the sample scripts for statements calling the `blob_service`. Check that you understand how trained models and predictions are stored and retrieved from the cloud.
@@ -285,7 +285,7 @@ To dive deeper into this tutorial:
 
 <a name="cleanup"></a>
 ### Cleanup
-When you have completed the tutorial, we recommend that you delete all of the resources you have created by executing the following command from the Azure Command Line Interface:
+When you have completed the example, we recommend that you delete all of the resources you have created by executing the following command from the Azure Command Line Interface:
 
   ```
   az group delete --name %AZURE_RESOURCE_GROUP%

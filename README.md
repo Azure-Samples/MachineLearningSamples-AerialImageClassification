@@ -36,7 +36,7 @@ The [step-by-step instructions](https://github.com/MicrosoftDocs/azure-docs-pr/t
 
 ## Prerequisites
 - An [Azure account](https://azure.microsoft.com/en-us/free/) (free trials are available)
-    - This tutorial creates an HDInsight Spark cluster with 40 worker nodes (168 cores total). Ensure that your account has enough available cores by reviewing the "Usage + quotas" tab for your subscription in Azure Portal.
+    - This example creates an HDInsight Spark cluster with 40 worker nodes (168 cores total). Ensure that your account has enough available cores by reviewing the "Usage + quotas" tab for your subscription in Azure portal.
     - If you have fewer cores available, follow the provided instructions to modify the HDInsight cluster creation template appropriately.
 - [Azure Machine Learning Workbench](./overview-what-is-azure-ml.md)
     - Follow the [quick start installation guide](./quick-start-installation.md) to install the program and create a workspace
