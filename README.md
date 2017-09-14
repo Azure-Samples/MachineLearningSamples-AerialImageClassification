@@ -14,6 +14,7 @@ The form of transfer learning we demonstrate has major advantages over retrainin
 - An installed copy of [AzCopy](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy), a free utility for coordinating file transfer between Azure storage accounts
 
 This example was tested on a Windows 10 PC; you should be able to run it from any Windows machine, including Azure Data Science Virtual Machines. Minor modifications may be required (for example, changes to filepaths) when running this example on macOS.
+[YC: Is this tutorial tested on DSVM? If yes, could we provide the version of DSVM that is tested? ]
 
 ## Use Case Description
 
