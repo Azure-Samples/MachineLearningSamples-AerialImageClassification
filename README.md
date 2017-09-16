@@ -17,11 +17,11 @@ To produce an image classifier using transfer learning, data scientists often co
 
 This scenario uses publicly available aerial imagery data from the [National Agriculture Imagery Program (NAIP)](https://www.fsa.usda.gov/programs-and-services/aerial-photography/imagery-programs/naip-imagery/) at 1-meter resolution. We have generated sets of 224 pixel x 224 pixel PNG files cropped from the original NAIP data and sorted according to land use labels from the [National Land Cover Database](https://www.mrlc.gov/nlcd2011.php). A sample image with label "Developed" is shown:
 
-![A sample tile of developed land](Images/sample_tile_developed.png)
+![A sample tile of developed land](docs/Images/sample_tile_developed.png)
 
 A class-balanced set of ~44k images is used for model training; an independent class-balanced set of ~11k images is used for model validation. We demonstrate model deployment on an image set tiling Middlesex County, MA -- home of Microsoft's New England Research and Development (NERD) center. For more information on how these image sets were constructed, see the [Embarrassingly Parallel Image Classification git repository](https://github.com/Azure/Embarrassingly-Parallel-Image-Classification).
 
-![Location of Middlesex County, Massachusetts](Images/middlesex_ma.png)
+![Location of Middlesex County, Massachusetts](docs/Images/middlesex_ma.png)
 
 ## Scenario Structure
 
@@ -29,7 +29,7 @@ Step-by-step instructions are provided on the [Microsoft DOCS site](https://gith
 
 In this example, image data and pretrained models are housed in an Azure storage account. An Azure HDInsight Spark cluster reads these files and constructs an image classification model using MMLSpark. The trained model and its predictions are then written to the storage account, where they can be analyzed and visualized by a Jupyter notebook running locally. Azure Machine Learning Workbench coordinates remote execution of scripts on the Spark cluster. It also tracks accuracy metrics for multiple models trained using different methods, allowing the user to select the most performant model.
 
-![Schematic for the aerial image classification real world scenario](../Images/scenario_schematic.png)
+![Schematic for the aerial image classification real world scenario](docs/Images/scenario_schematic.png)
 
 The [step-by-step instructions](https://github.com/MicrosoftDocs/azure-docs-pr/tree/release-ignite-aml-v2/articles/machine-learning/) begin by guiding you through the creation and preparation of an Azure storage account and Spark cluster, including data transfer and dependency installation. They then describe how to launch training jobs and compare the performance of the resulting models. Finally, they illustrate how to apply a chosen model to a large image set on the Spark cluster and analyze the prediction results locally.
 
