@@ -68,8 +68,8 @@ The following instructions guide you through the process of setting up execution
 - An [Azure account](https://azure.microsoft.com/en-us/free/) (free trials are available)
     - This sample creates an HDInsight Spark cluster with 40 worker nodes (168 cores total). Ensure that your account has enough available cores by reviewing the "Usage + quotas" tab for your subscription in Azure Portal.
     - If you have fewer cores available, you may modify the HDInsight cluster template to decrease the number of workers provisioned. Instructions for this appear under the "Create the HDInsight Spark cluster" section.
-- [Azure Machine Learning Workbench]()
-    - Follow the [quick start installation guide]() to install the program and create a workspace
+- [Azure Machine Learning Workbench](https://github.com/MicrosoftDocs/azure-docs-pr/blob/release-ignite-aml-v2/articles/machine-learning/preview/overview-what-is-azure-ml.md)
+    - Follow the [quick start installation guide](https://github.com/MicrosoftDocs/azure-docs-pr/blob/release-ignite-aml-v2/articles/machine-learning/preview/quick-start-installation.md) to install the program and create a workspace
 - [AzCopy](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy), a free utility for coordinating file transfer between Azure storage accounts
 
 This example was tested on a Windows 10 PC; you should be able to run it from any Windows machine, including Azure Data Science Virtual Machines. Minor modifications may be required (for example, changes to filepaths) when running this example on macOS.
