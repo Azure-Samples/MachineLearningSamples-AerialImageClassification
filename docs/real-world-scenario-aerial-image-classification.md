@@ -71,6 +71,7 @@ The following instructions guide you through the process of setting up execution
 - [Azure Machine Learning Workbench](https://github.com/MicrosoftDocs/azure-docs-pr/blob/release-ignite-aml-v2/articles/machine-learning/preview/overview-what-is-azure-ml.md)
     - Follow the [quick start installation guide](https://github.com/MicrosoftDocs/azure-docs-pr/blob/release-ignite-aml-v2/articles/machine-learning/preview/quick-start-installation.md) to install the program and create a workspace
 - [AzCopy](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy), a free utility for coordinating file transfer between Azure storage accounts
+    - Ensure that the folder containing the AzCopy executable is on your system's PATH environment variable. (Instructions on modifying environment variables are available [here](https://support.microsoft.com/en-us/help/310519/how-to-manage-environment-variables-in-windows-xp))
 
 This example was tested on a Windows 10 PC; you should be able to run it from any Windows machine, including Azure Data Science Virtual Machines. Minor modifications may be required (for example, changes to filepaths) when running this example on macOS.
 
@@ -142,7 +143,7 @@ We now create the storage account that hosts project files that must be accessed
     set STORAGE_ACCOUNT_KEY=[storage account key]
     ```
 1. In your favorite text editor, load the `settings.cfg` file from the AML Workbench project's "Code" subdirectory, and insert the storage account name and key as indicated. Save and close the `settings.cfg` file.
-1. If you have not already done so, download and install the [AzCopy](http://aka.ms/downloadazcopy) utility.
+1. If you have not already done so, download and install the [AzCopy](http://aka.ms/downloadazcopy) utility. Ensure that the AzCopy executable is on your system path by typing "AzCopy" and pressing Enter to show its documentation.
 1. Issue the following commands to copy all of the sample data, pretrained models, and model training scripts to the appropriate locations in your storage account:
 
     ```
