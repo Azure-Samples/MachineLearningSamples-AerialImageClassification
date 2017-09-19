@@ -39,7 +39,7 @@ The public GitHub repository for this real world scenario contains all materials
 <a name="usecasedescription"></a>
 ## Use case description
 
-In this scenario, we train deep neural networks (DNNs) to classify the type of land shown in aerial images of 224-meter x 224-meter plots. Land use classification models can be used to track urbanization, deforestation, loss of wetlands, and other major environmental trends using periodically collected aerial imagery. We have prepared training and validation image sets based on imagery from the U.S. National Agriculture Imagery Program and land use labels published by the U.S. National Land Cover Database. Example images in each land use class are shown below:
+In this scenario, we train machine learning models to classify the type of land shown in aerial images of 224-meter x 224-meter plots. Land use classification models can be used to track urbanization, deforestation, loss of wetlands, and other major environmental trends using periodically collected aerial imagery. We have prepared training and validation image sets based on imagery from the U.S. National Agriculture Imagery Program and land use labels published by the U.S. National Land Cover Database. Example images in each land use class are shown below:
 
 ![Example regions for each land use label](Images/example_labels.PNG)
 
@@ -138,7 +138,7 @@ We now create the storage account that hosts project files that must be accessed
     az storage account keys list --resource-group %AZURE_RESOURCE_GROUP% --account-name %STORAGE_ACCOUNT_NAME%
     ```
 
-    Record the value of `key1` where indicated in the following command, then run the command to store the value.
+    Record the value of `key1` as the storage key in the following command, then run the command to store the value.
     ```
     set STORAGE_ACCOUNT_KEY=[storage account key]
     ```
@@ -188,6 +188,7 @@ Once HDInsight cluster creation is complete, register the cluster as a compute t
 
     This command adds two files, `myhdi.runconfig` and `myhdi.compute`, to your project's `aml_config` folder.
 
+1. Open the `myhdi.compute` file in your favorite text editor. Modify the `yarnDeployMode: cluster` line to read `yarnDeployMode: client`, then save and close the file.
 1. Run the following command to prepare your environment for use:
    ```
    az ml experiment prepare -c myhdi
