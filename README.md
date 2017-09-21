@@ -4,7 +4,7 @@
 
 The detailed documentation for this real world scenario includes the step-by-step walkthrough:
 
-[https://review.docs.microsoft.com/en-us/azure/machine-learning/preview/scenario-aerial-image-classification](https://review.docs.microsoft.com/en-us/azure/machine-learning/preview/scenario-aerial-image-classification)
+[https://docs.microsoft.com/azure/machine-learning/preview/scenario-aerial-image-classification](https://docs.microsoft.com/azure/machine-learning/preview/scenario-aerial-image-classification)
 
 ## Link to the Gallery GitHub repository
 
