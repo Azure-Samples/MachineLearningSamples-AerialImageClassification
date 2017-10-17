@@ -3,9 +3,9 @@ batch_score_spark.py
 by Mary Wahl
 (c) Microsoft Corporation, 2017
 
-Applies a trained MMLSpark model to a large static dataset in an HDInsight
-cluster's associated blob storage account. This script require the following
-arguments:
+Applies a trained Batch AI Training or MMLSpark model to a large static dataset
+in an HDInsight cluster's associated blob storage account. This script requires
+the following arguments:
 - config_filename:   Includes storage account credentials and container names
 - output_model_name: The model name specified at the time of training; used for
                      lookup of output files in blob storage.
@@ -85,6 +85,33 @@ class ConfigFile(object):
 			.setOutputCol('unrolled')
 		return
 
+def load_batchaitraining_model_components(config):
+	''' Loads all components needed to apply a trained BAIT model '''
+	# Get the CNTK model itself
+	model_uri = 'wasb://{}@'.format(config.container_trained_models) + \
+				'{}.blob.core'.format(config.storage_account_name) + \
+				'.windows.net/{}'.format(config.output_model_name) + \
+				'/retrained.model'
+	config.cntk_model = mmlspark.CNTKModel().setInputCol('unrolled') \
+		.setOutputCol('features').setModelLocation(config.spark, model_uri) \
+		.setOutputNodeName('last_layer')
+
+	# Load the correspondence between indices and labels
+	labels_to_inds_str = blob_service.get_blob_to_text(
+		container_name=self.container_trained_models,
+		blob_name='{}/labels_to_inds.tsv')
+	config.inds_to_labels = {}
+	for line in labels_to_inds_str.content.split('\n'):
+		if len(line) == 0:
+			continue
+		key, val = line.strip().split('\t')
+		config.inds_to_labels[int(val)] = key
+
+	# Create a UDF to find argmax on model output and convert to a string label
+	config.label_udf = udf(lambda x: config.inds_to_labels(np.argmax(x)),
+						   StringType())
+	return(config)
+
 
 def load_mmlspark_model_components(config):
 	''' Loads all components needed to apply a trained MMLSpark model '''
@@ -131,16 +158,23 @@ def main(config_filename, output_model_name, sample_frac):
 	''' Coordinate application of trained models to large static image set '''
 	config = ConfigFile(config_filename, output_model_name)
 
-	if config.model_source == 'mmlspark':
+	if config.model_source == 'batchaitraining':
+		config = load_batchaitraining_model_components(config)
+	elif config.model_source == 'mmlspark':
 		config = load_mmlspark_model_components(config)
 	else:
 		raise Exception('Model source not recognized')
 
 	df = load_data(config, sample_frac)
 
-	predictions = config.mmlspark_model.transform(df)
-	predictions = config.tf.transform(predictions).select(
-		'filepath', 'pred_label')
+	if config.model_source == 'batchaitraining':
+		predictions = df.withColumn('pred_label',
+									config.label_udf('features')) \
+			.select('filepath', 'pred_label')
+	elif config.model_source == 'mmlspark':
+		predictions = config.mmlspark_model.transform(df)
+		predictions = config.tf.transform(predictions).select(
+			'filepath', 'pred_label')
 
 	output_str = predictions.toPandas().to_csv(index=False)
 	blob_service = BlockBlobService(config.storage_account_name,
@@ -155,8 +189,8 @@ def main(config_filename, output_model_name, sample_frac):
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='''
-Applies a trained MMLSpark model to a large static dataset in an HDInsight
-cluster's associated blob storage account.
+Applies a trained Batch AI Training or MMLSpark model to a large static dataset
+in an HDInsight cluster's associated blob storage account.
 ''')
 	parser.add_argument('-c', '--config_filename',
 						type=str, required=True,
