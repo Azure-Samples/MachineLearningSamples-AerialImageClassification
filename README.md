@@ -13,12 +13,13 @@ The public GitHub repository for this real world scenario contains all the code 
 
 ## Overview
 
-In this scenario, we train machine learning models to classify the type of land shown in aerial images of 224-meter x 224-meter plots. Land use classification models can be used to track urbanization, deforestation, loss of wetlands, and other major environmental trends using periodically collected aerial imagery. After training and validating the classification model, we will apply it to aerial images spanning Middlesex County, MA -- home of Microsoft's New England Research & Development (NERD) Center -- to demonstrate how these models can be used to study trends in urban development. This example demonstrates how to use Azure Machine Learning (AML) Workbench to coordinate distributed training and operationalization using the [Microsoft Machine Learning for Apache Spark (MMLSpark)](https://github.com/Azure/mmlspark) package on an [Azure HDInsight Spark](https://azure.microsoft.com/en-us/services/hdinsight/apache-spark/) cluster.
+In this scenario, we train machine learning models to classify the type of land shown in aerial images of 224-meter x 224-meter plots. Land use classification models can be used to track urbanization, deforestation, loss of wetlands, and other major environmental trends using periodically collected aerial imagery. After training and validating the classification model, we will apply it to aerial images spanning Middlesex County, MA -- home of Microsoft's New England Research & Development (NERD) Center -- to demonstrate how these models can be used to study trends in urban development. This example includes two approaches for distributed model training with Azure Machine Learning (AML) Workbench: deep neural network training on [Azure Batch AI](https://batchaitraining.azure.com/) GPU clusters, and transfer learning using the [Microsoft Machine Learning for Apache Spark (MMLSpark)](https://github.com/Azure/mmlspark) package. The example concludes with an illustration of model operationalization for scoring large static image sets on an [Azure HDInsight Spark](https://azure.microsoft.com/en-us/services/hdinsight/apache-spark/) cluster.
 
 ## Key components needed to run this scenario
-- An [Azure account](https://azure.microsoft.com/en-us/free/) (free trials are available), which will be used to create an HDInsight Spark cluster with 40 worker nodes.
-- [Azure Machine Learning Workbench](https://review.docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml)
+- An [Azure account](https://azure.microsoft.com/en-us/free/) (free trials are available), which will be used to create an HDInsight Spark cluster with 40 worker nodes and an Azure Batch AI GPU cluster with two VMs/two GPUs.
+- [Azure Machine Learning Workbench](https://review.docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml).
 - [AzCopy](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy), a free utility for coordinating file transfer between Azure storage accounts.
+- An SSH client; we recommend [PuTTy](http://www.putty.org/).
 
 ## Contributing
 
