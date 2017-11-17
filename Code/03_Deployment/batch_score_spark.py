@@ -21,6 +21,9 @@ from pyspark.sql.types import *
 from pyspark.ml.feature import IndexToString
 from mmlspark import TrainedClassifierModel
 
+run_logger = get_azureml_logger()
+run_logger.log('amlrealworld.aerial_image_classification.batch_score_spark','true')
+
 def ensure_str(str_data):
 	''' Helper function to correct type of imported strings '''
 	if isinstance(str_data, str):
