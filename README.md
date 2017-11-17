@@ -21,6 +21,9 @@ In this scenario, we train machine learning models to classify the type of land 
 - [AzCopy](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy), a free utility for coordinating file transfer between Azure storage accounts.
 - An SSH client; we recommend [PuTTy](http://www.putty.org/).
 
+## Data/Telemetry
+Aerial Image Classification collects usage data and sends it to Microsoft to help improve our products and services. Read our [privacy statement](http://go.microsoft.com/fwlink/?LinkId=521839) to learn more. 
+
 ## Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a

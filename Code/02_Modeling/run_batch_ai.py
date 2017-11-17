@@ -328,6 +328,7 @@ def main(pretrained_model_type, retraining_type, config_filename,
 
 	# Log the parameters used for this run
 	run_logger = get_azureml_logger()
+	run_logger.log('amlrealworld.aerial_image_classification.run_batch_ai','true')
 	run_logger.log('pretrained_model_type', pretrained_model_type)
 	run_logger.log('config_filename', config_filename)
 	run_logger.log('retraining_type', retraining_type)

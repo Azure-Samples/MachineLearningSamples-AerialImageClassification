@@ -134,6 +134,7 @@ def main(pretrained_model_type, mmlspark_model_type, config_filename,
 
 	# Log the parameters of the run
 	run_logger = get_azureml_logger()
+	run_logger.log('amlrealworld.aerial_image_classification.run_mmlspark','true')
 	run_logger.log('pretrained_model_type', pretrained_model_type)
 	run_logger.log('mmlspark_model_type', mmlspark_model_type)
 	run_logger.log('config_filename', config_filename)
