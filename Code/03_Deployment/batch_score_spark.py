@@ -100,8 +100,10 @@ def load_batchaitraining_model_components(config):
 		.setOutputNodeName('last_layer')
 
 	# Load the correspondence between indices and labels
+	blob_service = BlockBlobService(config.storage_account_name,
+		config.storage_account_key)
 	labels_to_inds_str = blob_service.get_blob_to_text(
-		container_name=self.container_trained_models,
+		container_name=config.container_trained_models,
 		blob_name='{}/labels_to_inds.tsv')
 	config.inds_to_labels = {}
 	for line in labels_to_inds_str.content.split('\n'):
