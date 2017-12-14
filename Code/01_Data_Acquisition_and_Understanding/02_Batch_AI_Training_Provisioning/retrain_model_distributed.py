@@ -58,12 +58,12 @@ def create_minibatch_source(map_filename, num_classes):
 										  side_ratio=0.85,
 										  jitter_type='uniratio'),
 				  xforms.scale(width=224,
-	  						   height=224,
-	  						   channels=3,
-	  						   interpolations='linear'),
+				  						   height=224,
+				  						   channels=3,
+				  						   interpolations='linear'),
 				  xforms.color(brightness_radius=0.2,
-	  						   contrast_radius=0.2,
-	  						   saturation_radius=0.2)]
+				  						   contrast_radius=0.2,
+				  						   saturation_radius=0.2)]
 	return(cntk.io.MinibatchSource(cntk.io.ImageDeserializer(
 		map_filename,
 		cntk.io.StreamDefs(
@@ -97,7 +97,7 @@ def load_alexnet_model(image_input, num_classes, model_filename,
 	feat_norm = image_input - cntk.layers.Constant(114)
 	conv_out = conv_layers(feat_norm)
 	fc_out = fully_connected_layers(conv_out)
-	new_model = cntk.layers.Dense(shape=num_classes, name='last_layer')(fc_out)
+	new_model = cntk.layers.Dense(shape=num_classes, name='lastlayer')(fc_out)
 	return(new_model)
 
 
@@ -117,7 +117,11 @@ def load_resnet18_model(image_input, num_classes, model_filename,
 	# Define the network using the loaded layers
 	feat_norm = image_input - cntk.layers.Constant(114)
 	cloned_out = cloned_layers(feat_norm)
-	new_model = cntk.layers.Dense(num_classes)(cloned_out)
+	W = cntk.ops.parameter(shape=(512, 1, 1, num_classes),
+		init=cntk.initializer.glorot_uniform())
+	b = cntk.ops.parameter(shape=num_classes, init=0)
+	new_model = cntk.ops.plus(cntk.ops.times(cloned_out, W, name='lasttimes'),
+		b, name='lastplus')
 	return(new_model)
 
 
@@ -211,7 +215,7 @@ def evaluate_model(map_filename, output_dir, num_classes):
 	loaded_model = cntk.load_model(os.path.join(output_dir, 'retrained.model'))
 	with open(map_filename, 'r') as f:
 		with open(os.path.join(output_dir, 'predictions.csv'), 'w') as g:
-			g.write('filename,true_label,pred_label\n')
+			g.write('filename,label,pred_label\n')
 			for line in f:
 				filename, true_ind = line.strip().split('\t')
 				image_data = np.array(Image.open(filename), dtype=np.float32)

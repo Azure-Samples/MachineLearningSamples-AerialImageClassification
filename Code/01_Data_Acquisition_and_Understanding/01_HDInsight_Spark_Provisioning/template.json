@@ -131,7 +131,7 @@
                         {
                             "name": "workernode",
                             "minInstanceCount": 1,
-                            "targetInstanceCount": 10,
+                            "targetInstanceCount": "[parameters('clusterWorkerNodeCount')]",
                             "hardwareProfile": {
                                 "vmSize": "Standard_D4_V2"
                             },

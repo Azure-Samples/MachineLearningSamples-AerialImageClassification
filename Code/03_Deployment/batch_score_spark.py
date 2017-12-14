@@ -97,12 +97,14 @@ def load_batchaitraining_model_components(config):
 				'/retrained.model'
 	config.cntk_model = mmlspark.CNTKModel().setInputCol('unrolled') \
 		.setOutputCol('features').setModelLocation(config.spark, model_uri) \
-		.setOutputNodeName('last_layer')
+		.setOutputNodeIndex(0)
 
 	# Load the correspondence between indices and labels
+	blob_service = BlockBlobService(config.storage_account_name,
+		config.storage_account_key)
 	labels_to_inds_str = blob_service.get_blob_to_text(
-		container_name=self.container_trained_models,
-		blob_name='{}/labels_to_inds.tsv')
+		container_name=config.container_trained_models,
+		blob_name='{}/labels_to_inds.tsv'.format(config.output_model_name))
 	config.inds_to_labels = {}
 	for line in labels_to_inds_str.content.split('\n'):
 		if len(line) == 0:
@@ -110,9 +112,6 @@ def load_batchaitraining_model_components(config):
 		key, val = line.strip().split('\t')
 		config.inds_to_labels[int(val)] = key
 
-	# Create a UDF to find argmax on model output and convert to a string label
-	config.label_udf = udf(lambda x: config.inds_to_labels(np.argmax(x)),
-						   StringType())
 	return(config)
 
 
@@ -171,8 +170,11 @@ def main(config_filename, output_model_name, sample_frac):
 	df = load_data(config, sample_frac)
 
 	if config.model_source == 'batchaitraining':
-		predictions = df.withColumn('pred_label',
-									config.label_udf('features')) \
+		# Create a UDF to find argmax on model output and convert to a string label
+		inds_to_labels = config.inds_to_labels
+		label_udf = udf(lambda x: str(inds_to_labels[np.argmax(x.toArray())]),
+			StringType())
+		predictions = df.withColumn('pred_label', label_udf(df['features'])) \
 			.select('filepath', 'pred_label')
 	elif config.model_source == 'mmlspark':
 		predictions = config.mmlspark_model.transform(df)
