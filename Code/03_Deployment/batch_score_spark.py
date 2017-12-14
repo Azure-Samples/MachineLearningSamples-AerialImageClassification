@@ -112,9 +112,6 @@ def load_batchaitraining_model_components(config):
 		key, val = line.strip().split('\t')
 		config.inds_to_labels[int(val)] = key
 
-	# Create a UDF to find argmax on model output and convert to a string label
-	config.label_udf = udf(lambda x: config.inds_to_labels[np.argmax(x)],
-						   StringType())
 	return(config)
 
 
@@ -173,8 +170,11 @@ def main(config_filename, output_model_name, sample_frac):
 	df = load_data(config, sample_frac)
 
 	if config.model_source == 'batchaitraining':
-		predictions = df.withColumn('pred_label',
-									config.label_udf('features')) \
+		# Create a UDF to find argmax on model output and convert to a string label
+		inds_to_labels = config.inds_to_labels
+		label_udf = udf(lambda x: str(inds_to_labels[np.argmax(x.toArray())]),
+			StringType())
+		predictions = df.withColumn('pred_label', label_udf(df['features'])) \
 			.select('filepath', 'pred_label')
 	elif config.model_source == 'mmlspark':
 		predictions = config.mmlspark_model.transform(df)
