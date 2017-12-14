@@ -215,7 +215,7 @@ def evaluate_model(map_filename, output_dir, num_classes):
 	loaded_model = cntk.load_model(os.path.join(output_dir, 'retrained.model'))
 	with open(map_filename, 'r') as f:
 		with open(os.path.join(output_dir, 'predictions.csv'), 'w') as g:
-			g.write('filename,true_label,pred_label\n')
+			g.write('filename,label,pred_label\n')
 			for line in f:
 				filename, true_ind = line.strip().split('\t')
 				image_data = np.array(Image.open(filename), dtype=np.float32)
